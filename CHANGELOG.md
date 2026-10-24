@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
-- initial folder structure
+- Initial folder structure
 - .gitignore, README, and CHANGELOG
+- Docker Compose setup for MongoDB and MySQL with environment-based configuration
+- `.env.example` template listing required environment variables
 
 
