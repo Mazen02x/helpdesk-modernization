@@ -1,0 +1,29 @@
+#Dependencies
+node_modules/
+
+#Secrets and environment configs
+.env
+.env.*
+!.env.example
+
+#Build Output
+dist/
+build/
+target/
+.angular/
+
+
+#Logs
+*.log
+np,-debug.log*
+
+#OS and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Test coverage reports
+coverage/
+
+#Plan
+PLAN.md
