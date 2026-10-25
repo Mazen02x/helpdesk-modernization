@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "subject": "Printer on 3rd floor not working",
+    "description": "Paper jam error every time",
+    "priority": "high",
+    "status": "open",
+    "requester": "jdoe",
+    "created": "2012-03-14"
+  },
+  {
+    "id": 2,
+    "subject": "Need access to shared driver",
+    "description": "Finance folder",
+    "priority": "low",
+    "status": "pending-approval",
+    "requester": "asmith",
+    "created": "2012-03-15"
+  },
+  {
+    "id": 3,
+    "subject": "VPN down",
+    "description": "Cannot connect from home",
+    "priority": "high",
+    "status": "open",
+    "requester": "mazen",
+    "created": "2026-10-25"
+  }
+]
