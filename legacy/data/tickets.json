@@ -4,7 +4,7 @@
     "subject": "Printer on 3rd floor not working",
     "description": "Paper jam error every time",
     "priority": "high",
-    "status": "approved",
+    "status": "closed",
     "requester": "jdoe",
     "created": "2012-03-14"
   },

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database xmlns="http://www.lotus.com/dxl" title="IT Help Desk" path="helpdesk.nsf">
+
+  <document form="Ticket">
+    <noteinfo unid="8A3F1C2E9B7D4E5F8A3F1C2E9B7D4E5F">
+      <created><datetime>20120314T091500,00-05</datetime></created>
+    </noteinfo>
+    <item name="Subject"><text>Printer on 3rd floor not working</text></item>
+    <item name="Body"><text>Paper jam error every time</text></item>
+    <item name="Priority"><text>1</text></item>
+    <item name="Status"><text>Open</text></item>
+    <item name="Requester"><text>CN=John Doe/OU=Finance/O=Acme</text></item>
+    <item name="Categories">
+      <textlist><text>Hardware</text><text>Printer</text></textlist>
+    </item>
+  </document>
+
+  <document form="Ticket">
+    <noteinfo unid="1B2C3D4E5F60718293A4B5C6D7E8F901">
+      <created><datetime>20090622T140000,00-05</datetime></created>
+    </noteinfo>
+    <item name="Title"><text>Email not syncing to BlackBerry</text></item>
+    <item name="Priority"><text>2</text></item>
+    <item name="Status"><text>Closed</text></item>
+    <item name="Requester"><text>CN=Anna Smith/OU=Sales/O=Acme</text></item>
+  </document>
+
+  <document form="Ticket">
+    <noteinfo unid="5E6F7A8B9C0D1E2F3A4B5C6D7E8F9A0B">
+      <created><datetime>20130908T163045,00-04</datetime></created>
+    </noteinfo>
+    <item name="Subject"><text>Need access to Finance shared drive</text></item>
+    <item name="Body"><text>New hire needs read access to \\fileserver\finance</text></item>
+    <item name="Priority"><text>3</text></item>
+    <item name="Status"><text>Pending Approval</text></item>
+    <item name="Requester"><text>CN=Maria Garcia/OU=Finance/O=Acme</text></item>
+    <item name="Approver"><text>CN=Robert Chen/OU=Finance/O=Acme</text></item>
+    <item name="Categories">
+      <textlist><text>Access</text><text>Network</text><text>Shared Drive</text></textlist>
+    </item>
+  </document>
+
+  <document form="Ticket">
+    <noteinfo unid="ABCDEF0123456789ABCDEF0123456789">
+      <created><datetime>20150211T074500,00-05</datetime></created>
+    </noteinfo>
+    <item name="subject"><text>Laptop screen flickering &amp; dim</text></item>
+    <item name="Body"><text>Happens after waking from sleep</text></item>
+    <item name="Priority"><text>high</text></item>
+    <item name="Status"><text>open</text></item>
+    <item name="Requester"><text>jdoe</text></item>
+  </document>
+
+  <document form="KBArticle">
+    <noteinfo unid="C0FFEE00C0FFEE00C0FFEE00C0FFEE00">
+      <created><datetime>20110105T080000,00-05</datetime></created>
+    </noteinfo>
+    <item name="Subject"><text>How to clear a printer paper jam</text></item>
+    <item name="Body"><text>Open tray 2, remove the paper, close the tray, press Resume.</text></item>
+    <item name="Author"><text>CN=IT Support/O=Acme</text></item>
+  </document>
+
+</database>

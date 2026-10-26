@@ -45,6 +45,7 @@
           <button ng-show="t.status == 'open'" ng-click="setStatus(t, 'pending-approval')">Request approval</button>
           <button ng-show="t.status == 'pending-approval'" ng-click="setStatus(t, 'approved')">Approve</button>
           <button ng-show="t.status == 'pending-approval'" ng-click="setStatus(t, 'rejected')">Reject</button>
+          <button ng-show="t.status == 'approved'" ng-click="setStatus(t, 'closed')">Closed</button>
         </td>
       </tr>
     </tbody>
