@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Help Desk (Legacy)</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+    h1 { color: #003366; }
+    table { border-collapse: collapse; width: 100%; background: white; }
+    th, td { border: 1px solid #999; padding: 6px; text-align: left; }
+    th { background: #003366; color: white; }
+    .high { color: red; font-weight: bold; }
+    form { background: white; padding: 10px; margin-top: 20px; border: 1px solid #999; }
+    label { display: block; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Help Desk Tickets</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Subject</th><th>Priority</th><th>Status</th><th>Requester</th><th>Created</th>
+      </tr>
+    </thead>
+    <tbody id="ticket-rows"></tbody>
+  </table>
+
+  <form id="new-ticket-form">
+    <h2>New Ticket</h2>
+    <label>Subject <input type="text" id="subject"></label>
+    <label>Description <textarea id="description"></textarea></label>
+    <label>Priority
+      <select id="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </label>
+    <label>Requester <input type="text" id="requester"></label>
+    <button type="submit">Create Ticket</button>
+  </form>
+
+  <script>
+    $(document).ready(function () {
+  loadTickets();
+  $('#new-ticket-form').on('submit', function (event) {
+    event.preventDefault();
+    var newTicket = {
+      subject: $('#subject').val(),
+      description: $('#description').val(),
+      priority: $('#priority').val(),
+      requester: $('#requester').val()
+    };
+    $.ajax({
+      url: '/api/tickets',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(newTicket),
+      success: function (createdTicket) {
+        loadTickets();
+        $('#new-ticket-form')[0].reset();
+        alert('Ticket #' + createdTicket.id + ' created');
+      },
+      error: function () {
+        alert('Could not create ticket');
+      }
+    });
+  });
+});
+
+function loadTickets() {
+  $.ajax({
+    url: '/api/tickets',
+    method: 'GET',
+    success: function (tickets) {
+      var rows = '';
+      for (var i = 0; i < tickets.length; i++) {
+        var t = tickets[i];
+        rows += '<tr>' +
+          '<td>' + t.id + '</td>' +
+          '<td>' + t.subject + '</td>' +
+          '<td class="' + t.priority + '">' + t.priority + '</td>' +
+          '<td>' + t.status + '</td>' +
+          '<td>' + t.requester + '</td>' +
+          '<td>' + t.created + '</td>' +
+          '</tr>';
+      }
+      $('#ticket-rows').html(rows);
+    },
+    error: function () {
+      alert('Could not load tickets');
+    }
+  });
+}
+
+  </script>
+</body>
+</html>

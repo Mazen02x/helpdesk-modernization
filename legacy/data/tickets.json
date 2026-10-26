@@ -25,5 +25,14 @@
     "status": "open",
     "requester": "mazen",
     "created": "2026-10-25"
+  },
+  {
+    "id": 4,
+    "subject": "coffee machine not working",
+    "description": "coffee machine",
+    "priority": "high",
+    "status": "open",
+    "requester": "mazen",
+    "created": "2026-10-26"
   }
 ]
