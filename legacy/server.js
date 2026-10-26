@@ -71,6 +71,36 @@ app.post('/api/tickets',(req,res) => {
     });
 })
 
+app.put('/api/tickets/:id', (req, res) => {
+  const statuses = ['open','pending-approval', 'approved', 'rejected', 'closed'];
+  if (!statuses.includes(req.body.status)){
+    return res.status(400).json({ error: 'Invalid status' });
+  }
+  fs.readFile(DATA_FILE, 'utf8', (err, data) => {
+    if (err){
+      return res.status(500).json({ error: 'Failed to read tickets' });
+    }
+    var tickets = JSON.parse(data);
+    var updatedTicket = null;
+    for (var i = 0; i < tickets.length; i++){
+      if (tickets[i].id == req.params.id){
+        tickets[i].status = req.body.status;
+        updatedTicket = tickets[i];
+        break;
+      }
+    }
+    if (updatedTicket == null){
+      return res.status(404).json({ error: 'Ticket not found' });
+    }
+    fs.writeFile(DATA_FILE, JSON.stringify(tickets, null, 2), (err) => {
+      if (err){
+        return res.status(500).json({ error: 'Failed to write tickets' });
+      }
+      return res.status(200).json(tickets[i]);
+    });
+  });
+});
+
 app.listen(PORT, function () {
   console.log('Legacy Help Desk running on http://localhost:' + PORT);
 });
