@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="helpdeskApp">
+<head>
+  <title>Approvals (Legacy)</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+    h1 { color: #003366; }
+    table { border-collapse: collapse; width: 100%; background: white; margin-top: 10px; }
+    th, td { border: 1px solid #999; padding: 6px; text-align: left; }
+    th { background: #003366; color: white; }
+    .high { color: red; font-weight: bold; }
+    .message { background: #ffffcc; padding: 8px; border: 1px solid #cc9; }
+  </style>
+</head>
+<body ng-controller="ApprovalController">
+  <h1>Ticket Approvals</h1>
+  <p><a href="/">← Back to tickets</a></p>
+
+  <label>Show:
+    <select ng-model="statusFilter">
+      <option value="">All</option>
+      <option value="open">Open</option>
+      <option value="pending-approval">Pending approval</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+      <option value="closed">Closed</option>
+    </select>
+  </label>
+
+  <p class="message" ng-show="message">{{ message }}</p>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Subject</th><th>Priority</th><th>Status</th><th>Requester</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="t in tickets | filter:{ status: statusFilter }">
+        <td>{{ t.id }}</td>
+        <td>{{ t.subject }}</td>
+        <td ng-class="t.priority">{{ t.priority }}</td>
+        <td>{{ t.status }}</td>
+        <td>{{ t.requester }}</td>
+        <td>
+          <button ng-show="t.status == 'open'" ng-click="setStatus(t, 'pending-approval')">Request approval</button>
+          <button ng-show="t.status == 'pending-approval'" ng-click="setStatus(t, 'approved')">Approve</button>
+          <button ng-show="t.status == 'pending-approval'" ng-click="setStatus(t, 'rejected')">Reject</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    var app = angular.module('helpdeskApp', []);
+
+    app.controller('ApprovalController', function ($scope, $http) {
+      $scope.tickets = [];
+      $scope.statusFilter = 'pending-approval';
+      $scope.message = '';
+
+      $scope.loadTickets = function () {
+        $http.get('/api/tickets').then(function (response) {
+          $scope.tickets = response.data;
+        }, function () {
+          $scope.message = 'Could not load tickets';
+        });
+      };
+
+      $scope.setStatus = function (ticket, newStatus) {
+        $http.put('/api/tickets/' + ticket.id, { status: newStatus }).then(function (response) {
+          ticket.status = response.data.status;
+          $scope.message = 'Ticket #' + ticket.id + ' is now ' + ticket.status;
+        }, function () {
+          $scope.message = 'Could not update ticket #' + ticket.id;
+        });
+      };
+
+      $scope.loadTickets();
+    });
+  </script>
+</body>
+</html>

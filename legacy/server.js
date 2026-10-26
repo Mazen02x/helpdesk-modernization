@@ -96,7 +96,7 @@ app.put('/api/tickets/:id', (req, res) => {
       if (err){
         return res.status(500).json({ error: 'Failed to write tickets' });
       }
-      return res.status(200).json(tickets[i]);
+      return res.status(200).json(updatedTicket);
     });
   });
 });
